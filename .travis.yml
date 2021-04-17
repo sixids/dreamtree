@@ -19,12 +19,17 @@ script: "./gradlew clean build"
 before_install:
   - chmod +x gradlew
 
+
 # CI 실행 완료시 메일로 알람
 notifications:
   email:
     recipients:
       - zeekgwang@gmail.com
 
+before_deploy:
+  - zip -r dreamtree-webservice
+  - mkdir -p deploy
+  - mv dreamtree-webservice.zip deploy/dreamtree-webservice.zip
 
 deploy:
   - provider: s3
@@ -34,6 +39,7 @@ deploy:
     region: ap-northeast-2
     skip_cleanup: true
     acl: public_read
+    local_dir: deploy
     wait-until-deployed: true
     on:
       repo: zeekgwang/dreamtree
