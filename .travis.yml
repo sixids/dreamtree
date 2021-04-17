@@ -25,3 +25,17 @@ notifications:
     recipients:
       - zeekgwang@gmail.com
 
+
+deploy:
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정값
+    secret_access_key: $AWS_SECRET_KEY # Travis repo settings에 설정값
+    bucket: dreamtree-deploy
+    region: ap-northeast-2
+    skip_cleanup: true
+    acl: public_read
+    wait-until-deployed: true
+    on:
+      repo: zeekgwang/dreamtree
+      branch: master
+
