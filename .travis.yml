@@ -27,7 +27,7 @@ notifications:
       - zeekgwang@gmail.com
 
 before_deploy:
-  - zip -r dreamtree-webservice
+  - zip -r dreamtree-webservice *
   - mkdir -p deploy
   - mv dreamtree-webservice.zip deploy/dreamtree-webservice.zip
 
