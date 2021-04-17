@@ -20,12 +20,6 @@ before_install:
   - chmod +x gradlew
 
 
-# CI 실행 완료시 메일로 알람
-notifications:
-  email:
-    recipients:
-      - zeekgwang@gmail.com
-
 before_deploy:
   - zip -r dreamtree-webservice *
   - mkdir -p deploy
@@ -45,3 +39,23 @@ deploy:
       repo: zeekgwang/dreamtree
       branch: master
 
+  - provider: codedeploy
+    access_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정값
+    secret_access_key: $AWS_SECRET_KEY # Travis repo settings에 설정값
+    bucket: dreamtree-deploy
+    key: dreamtree-webservice.zip
+    bundle_type: zip
+    application: dreamtree-webservice
+    deployment_group: dreamtree-webservice-group
+    region: ap-northeast-2
+    wait-until-deployed: true
+    on:
+      repo: zeekgwang/dreamtree
+      branch: master
+
+
+# CI 실행 완료시 메일로 알람
+notifications:
+  email:
+    recipients:
+      - zeekgwang@gmail.com
