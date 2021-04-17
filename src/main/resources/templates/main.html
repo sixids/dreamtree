@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/css/lib/bootstrap.min.css">
 </head>
 <body>
-    <h1>스프링부트로 시작하는 웹 서비스 v0.0.2</h1>
+    <h1>스프링부트로 시작하는 웹 서비스</h1>
 
     <div class="col-md-12">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#savePostsModal">글 등록</button>
@@ -20,6 +20,7 @@
                 <tr>
                     <th scope="col">게시글 번호</th>
                     <th scope="col">제목</th>
+                    <th scope="col">내용</th>
                     <th scope="col">작성자</th>
                     <th scope="col">최종수정일</th>
                 </tr>
@@ -28,6 +29,7 @@
                 <tr th:each="p : ${posts}">
                     <td th:text="${p.id}"></td>
                     <td th:text="${p.title}"></td>
+                    <td th:text="${p.content}"></td>
                     <td th:text="${p.author}"></td>
                     <td th:text="${p.modifiedDate}"></td>
                 </tr>
