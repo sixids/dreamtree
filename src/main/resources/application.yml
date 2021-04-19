@@ -1,10 +1,4 @@
-spring:
-  profiles:
-    active: local
-
 ---
-spring:
-  profiles: local
   datasource:
     data: classpath:data-h2.sql
   jpa:
@@ -14,3 +8,26 @@ spring:
   h2:
     console:
       enabled: true
+  spring:
+    config:
+      activate:
+        on-profile: local
+---
+spring:
+  profiles:
+    group:
+      "prod": set1, realDB
+---
+server:
+  port: 8081
+spring:
+  config:
+    activate:
+      on-profile: set1
+---
+server:
+  port: 8082
+spring:
+  config:
+    activate:
+      on-profile: set2
