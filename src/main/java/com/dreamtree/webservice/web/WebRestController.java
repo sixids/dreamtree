@@ -43,7 +43,22 @@ public class WebRestController {
     }
 
     @GetMapping("/stores/{id}")
-    public List<StoresMainResponseDto> getStore(@PathVariable(value="id") int id) {
-        return storesService.getStore(id);
+    public StoresMainResponseDto getStoreByStore_id(@PathVariable(value="id") int id) {
+        return storesService.getStoreByStore_id(id);
+    }
+
+    @GetMapping("/stores/search")
+    public List<StoresMainResponseDto> getStoresByLatAndLng(
+            @RequestParam(value = "top") double top,
+            @RequestParam(value = "bottom") double bottom,
+            @RequestParam(value = "left") double left,
+            @RequestParam(value = "right") double right,
+            @RequestParam(value = "store_type", required = false, defaultValue = "none") String store_type
+    ){
+        if("none".equals(store_type)){
+            return storesService.getStoresByLatAndLng(top, bottom, left, right);
+        }else{
+            return storesService.getStoresByLatAndLngAndStore_type(top, bottom, left, right, store_type);
+        }
     }
 }

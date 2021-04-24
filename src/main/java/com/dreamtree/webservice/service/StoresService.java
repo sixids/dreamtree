@@ -23,8 +23,25 @@ public class StoresService {
     }
 
     @Transactional(readOnly = true)
-    public List<StoresMainResponseDto> getStore(int store_id){
-        return storesRepository.getStoresByStore_id(store_id)
+    public StoresMainResponseDto getStoreByStore_id(int store_id) {
+        return storesRepository.getStoreByStore_id(store_id)
+                .map(StoresMainResponseDto::new)
+                .collect(Collectors.toList())
+                .get(0);
+    }
+
+    @Transactional(readOnly = true)
+    public List<StoresMainResponseDto> getStoresByLatAndLng(double top, double bottom, double left, double right) {
+        return storesRepository.getStoresByLatAndLng(top, bottom, left, right)
+                .map(StoresMainResponseDto::new)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<StoresMainResponseDto> getStoresByLatAndLngAndStore_type(
+            double top, double bottom, double left, double right, String store_type
+    ) {
+        return storesRepository.getStoresByLatAndLngAndStore_type(top, bottom, left, right, store_type)
                 .map(StoresMainResponseDto::new)
                 .collect(Collectors.toList());
     }
