@@ -16,6 +16,9 @@ public class Stores extends StoresTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int store_id;
 
+    @Column(length = 50, nullable = false)
+    private String card;
+
     @Column(length = 300, nullable = false)
     private String name;
 
@@ -40,8 +43,9 @@ public class Stores extends StoresTimeEntity {
     private double lng;
 
     @Builder
-    public Stores(String name, String store_type, String addr1, String addr2, String phone_number, double lat, double lng){
+    public Stores(String name, String card, String store_type, String addr1, String addr2, String phone_number, double lat, double lng){
         this.name = name;
+        this.card = card;
         this.store_type = store_type;
         this.addr1 = addr1;
         this.addr2 = addr2;

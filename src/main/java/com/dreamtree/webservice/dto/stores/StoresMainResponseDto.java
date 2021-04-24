@@ -14,6 +14,7 @@ import java.util.Optional;
 @NoArgsConstructor
 public class StoresMainResponseDto {
     private int store_id;
+    private String card;
     private String name;
     private String store_type;
     private String addr1;
@@ -25,6 +26,7 @@ public class StoresMainResponseDto {
 
     public StoresMainResponseDto(Stores entity){
         store_id = entity.getStore_id();
+        card = entity.getCard();
         name = entity.getName();
         store_type = entity.getStore_type();
         addr1 = entity.getAddr1();
