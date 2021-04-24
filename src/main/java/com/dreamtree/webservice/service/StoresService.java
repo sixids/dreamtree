@@ -21,4 +21,11 @@ public class StoresService {
                 .map(StoresMainResponseDto::new)
                 .collect(Collectors.toList());
     }
+
+    @Transactional(readOnly = true)
+    public List<StoresMainResponseDto> getStore(int store_id){
+        return storesRepository.getStoresByStore_id(store_id)
+                .map(StoresMainResponseDto::new)
+                .collect(Collectors.toList());
+    }
 }

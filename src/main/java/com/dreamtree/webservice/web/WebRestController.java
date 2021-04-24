@@ -41,4 +41,9 @@ public class WebRestController {
     public List<StoresMainResponseDto> getStores(){
         return storesService.findAllDesc();
     }
+
+    @GetMapping("/stores/{id}")
+    public List<StoresMainResponseDto> getStore(@PathVariable(value="id") int id) {
+        return storesService.getStore(id);
+    }
 }
