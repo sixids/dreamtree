@@ -50,7 +50,7 @@ public class WebRestController {
     // 왼쪽 아래(bottom, left), 오른쪽 위(top, right)
     @GetMapping("/stores/search")
     public List<StoresMainResponseDto> getStoresByLatAndLng(
-            @RequestParam(value = "bound") String bound,
+            @RequestParam(value = "bounds") String bound,
             @RequestParam(value = "store_type", required = false, defaultValue = "none") String store_type
     ){
         String[] rect = bound.split(",");
