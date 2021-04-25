@@ -23,7 +23,7 @@ public interface StoresRepository extends JpaRepository<Stores, Integer> {
     @Query("select s " +
             "from Stores s " +
             "where 1=1 " +
-            "and s.lat between :top and :bottom " +
+            "and s.lat between :bottom and :top " +
             "and s.lng between :left and :right")
     Stream<Stores> getStoresByLatAndLng(
             @Param("top") double top,
@@ -35,7 +35,7 @@ public interface StoresRepository extends JpaRepository<Stores, Integer> {
     @Query("select s " +
             "from Stores s " +
             "where 1=1 " +
-            "and s.lat between :top and :bottom " +
+            "and s.lat between :bottom and :top " +
             "and s.lng between :left and :right " +
             "and s.store_type = :store_type")
     Stream<Stores> getStoresByLatAndLngAndStore_type(

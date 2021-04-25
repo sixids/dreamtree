@@ -47,18 +47,25 @@ public class WebRestController {
         return storesService.getStoreByStore_id(id);
     }
 
+    // 왼쪽 아래(bottom, left), 오른쪽 위(top, right)
     @GetMapping("/stores/search")
     public List<StoresMainResponseDto> getStoresByLatAndLng(
-            @RequestParam(value = "top") double top,
-            @RequestParam(value = "bottom") double bottom,
-            @RequestParam(value = "left") double left,
-            @RequestParam(value = "right") double right,
+            @RequestParam(value = "bound") String bound,
             @RequestParam(value = "store_type", required = false, defaultValue = "none") String store_type
     ){
+        String[] rect = bound.split(",");
+
+        double bottom = Double.parseDouble(rect[0]);
+        double left = Double.parseDouble(rect[1]);
+        double top = Double.parseDouble(rect[2]);
+        double right = Double.parseDouble(rect[3]);
+
         if("none".equals(store_type)){
             return storesService.getStoresByLatAndLng(top, bottom, left, right);
         }else{
             return storesService.getStoresByLatAndLngAndStore_type(top, bottom, left, right, store_type);
         }
     }
+
+
 }
