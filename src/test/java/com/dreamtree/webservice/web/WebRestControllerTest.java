@@ -1,11 +1,14 @@
 package com.dreamtree.webservice.web;
 
+import com.dreamtree.webservice.dto.stores.StoresMainResponseDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -22,6 +25,7 @@ public class WebRestControllerTest {
         String profile = this.restTemplate.getForObject("/profile", String.class);
 
         //then
-        assertThat(profile).isEqualTo("local");
+        assertThat(profile).isEqualTo("prod");
     }
+
 }

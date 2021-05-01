@@ -43,7 +43,7 @@ public class PostServiceTest {
         postsService.save(dto);
 
         //then
-        Posts posts = postsRepository.findAll().get(2);
+        Posts posts = postsRepository.findAll().get(0);
         assertThat(posts.getTitle()).isEqualTo("테스트 타이틀");
         assertThat(posts.getContent()).isEqualTo("테스트 본문");
         assertThat(posts.getAuthor()).isEqualTo("zeekgwang@gmail.com");
