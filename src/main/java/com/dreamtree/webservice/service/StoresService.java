@@ -31,17 +31,11 @@ public class StoresService {
     }
 
     @Transactional(readOnly = true)
-    public List<StoresMainResponseDto> getStoresByLatAndLng(double top, double bottom, double left, double right) {
-        return storesRepository.getStoresByLatAndLng(top, bottom, left, right)
-                .map(StoresMainResponseDto::new)
-                .collect(Collectors.toList());
-    }
-
-    @Transactional(readOnly = true)
-    public List<StoresMainResponseDto> getStoresByLatAndLngAndStore_type(
-            double top, double bottom, double left, double right, String store_type
-    ) {
-        return storesRepository.getStoresByLatAndLngAndStore_type(top, bottom, left, right, store_type)
+    public List<StoresMainResponseDto> getStoresByDynamicQuery(
+            double bottom, double left, double top, double right, String name, String card
+    ){
+        return storesRepository.getStoresDynamicQuery(bottom, left, top, right, name, card)
+                .stream()
                 .map(StoresMainResponseDto::new)
                 .collect(Collectors.toList());
     }

@@ -49,9 +49,10 @@ public class WebRestController {
 
     // 왼쪽 아래(bottom, left), 오른쪽 위(top, right)
     @GetMapping("/stores/search")
-    public List<StoresMainResponseDto> getStoresByLatAndLng(
+    public List<StoresMainResponseDto> getStoresByDynamicQuery(
             @RequestParam(value = "bounds") String bound,
-            @RequestParam(value = "store_type", required = false, defaultValue = "none") String store_type
+            @RequestParam(value = "name", required = false, defaultValue = "") String name,
+            @RequestParam(value = "card", required = false, defaultValue = "") String card
     ){
         String[] rect = bound.split(",");
 
@@ -60,12 +61,7 @@ public class WebRestController {
         double top = Double.parseDouble(rect[2]);
         double right = Double.parseDouble(rect[3]);
 
-        if("none".equals(store_type)){
-            return storesService.getStoresByLatAndLng(top, bottom, left, right);
-        }else{
-            return storesService.getStoresByLatAndLngAndStore_type(top, bottom, left, right, store_type);
-        }
+        return storesService.getStoresByDynamicQuery(bottom, left, top, right, name, card);
     }
-
 
 }

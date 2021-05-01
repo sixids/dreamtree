@@ -6,7 +6,7 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.stream.Stream;
 
-public interface StoresRepository extends JpaRepository<Stores, Integer> {
+public interface StoresRepository extends JpaRepository<Stores, Integer>, StoresRepositoryCustom {
 
     @Query("select s " +
             "from Stores s " +
@@ -18,32 +18,6 @@ public interface StoresRepository extends JpaRepository<Stores, Integer> {
             "where s.store_id = :store_id")
     Stream<Stores> getStoreByStore_id(
             @Param("store_id") int store_id
-    );
-
-    @Query("select s " +
-            "from Stores s " +
-            "where 1=1 " +
-            "and s.lat between :bottom and :top " +
-            "and s.lng between :left and :right")
-    Stream<Stores> getStoresByLatAndLng(
-            @Param("top") double top,
-            @Param("bottom") double bottom,
-            @Param("left") double left,
-            @Param("right") double right
-    );
-
-    @Query("select s " +
-            "from Stores s " +
-            "where 1=1 " +
-            "and s.lat between :bottom and :top " +
-            "and s.lng between :left and :right " +
-            "and s.store_type = :store_type")
-    Stream<Stores> getStoresByLatAndLngAndStore_type(
-            @Param("top") double top,
-            @Param("bottom") double bottom,
-            @Param("left") double left,
-            @Param("right") double right,
-            @Param("store_type") String store_type
     );
 
 }
